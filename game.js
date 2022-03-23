@@ -1,16 +1,16 @@
 const player = {
   player1: {
     name: "",
-    score: 0
+    score: 0,
   },
   player2: {
     name: "",
-    score: 0
-  }
-}
+    score: 0,
+  },
+};
 
-function displayName(player1,player2) {
-  return (`Welcome to Tenzi game ${player1} and ${player2}`);
+function displayName(player1, player2) {
+  return `Welcome to Tenzi game ${player1} and ${player2}`;
 }
 
 function welcome(req, res) {
@@ -81,6 +81,5 @@ function playTenziFun() {
   }
   return rollCounter;
 }
-
 
 module.exports = { displayName, welcome, playTenziFun, player };
