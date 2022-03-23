@@ -1,3 +1,13 @@
+const player = {
+  player1: {
+    name: "",
+    score: 0
+  },
+  player2: {
+    name: "",
+    score: 0
+  }
+}
 
 function displayName(player1,player2) {
   return (`Welcome to Tenzi game ${player1} and ${player2}`);
@@ -8,8 +18,6 @@ function welcome(req, res) {
     `Welcome to Tenzi Game. Please enter your name using this command: curl "http://localhost:4000/inputnames?player1={yourName}&player2={yourname}"`
   );
 }
-let player1;
-let player2;
 
 function rollSetOfDice(times) {
   let diceArray = [];
@@ -75,4 +83,4 @@ function playTenziFun() {
 }
 
 
-module.exports = { displayName, welcome, playTenziFun };
+module.exports = { displayName, welcome, playTenziFun, player };

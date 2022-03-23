@@ -1,21 +1,22 @@
 const express = require("express");
 let res = require("express/lib/response");
 
-const { welcome, displayName, playTenziFun } = require("./game");
+const { welcome, displayName, playTenziFun, player } = require("./game");
 const { request } = require("express");
 const app = express();
 
 app.get("/", welcome);
 
 app.get("/inputnames", (req, res) => {
-  player1 = req.query.player1;
-  player2 = req.query.player2;
-
+  player.player1.name = req.query.player1;
+  player.player2.name = req.query.player2;
+  
+  
   res.send(
     `${displayName(
-      player1,
-      player2
-    )}. ${player1} is now Player1, ${player2} is now Player2. Please see "http://localhost:4000/instructions"`
+      player.player1.name,
+      player.player2.name
+    )}. ${player.player1.name} is now Player1, ${player.player2.name} is now Player2. Please see "http://localhost:4000/instructions"`
   );
 });
 
@@ -26,17 +27,20 @@ app.get("/instructions", (req, res) => {
 });
 
 app.get("/playgame", (req, res) => {
-  if (player1) {
+  if (player.player1.name) {
     const countPlayer1 = playTenziFun();
     const countPlayer2 = playTenziFun();
 
+
     if (countPlayer1 < countPlayer2) {
+      player.player1.score = player.player1.score + 1;
       res.send(
-        `Tenzi!!! ${player1} rolled ${countPlayer1} times and ${player2} rolled ${countPlayer2} times. So, ${player1} wins!!!`
+        `Tenzi!!! ${player.player1.name} rolled ${countPlayer1} times and ${player.player2.name} rolled ${countPlayer2} times. So, ${player.player1.name} wins!!! and Score = ${player.player1.score}`  
       );
     } else {
+      player.player2.score = player.player2.score + 1;
       res.send(
-        `Tenzi!!! ${player1} rolled ${countPlayer1} times and ${player2} rolled ${countPlayer2} times. So, ${player2} wins!!!`
+        `Tenzi!!! ${player.player1.name} rolled ${countPlayer1} times and ${player.player2.name} rolled ${countPlayer2} times. So, ${player.player2.name} wins!!! and Score = ${player.player2.score}`
       );
     }
   } else {
